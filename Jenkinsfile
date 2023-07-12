@@ -5,6 +5,7 @@ pipeline {
             steps {
                 sh  """
                     echo "testing...."
+                    echo "key is &{TEST}"
                 """
             }
         }
