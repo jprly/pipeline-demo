@@ -5,8 +5,6 @@ pipeline {
             steps {
                 sh  """
                     echo "testing...."
-                    echo $aws_access_key_id
-                    aws help
                 """
             }
         }
