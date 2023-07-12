@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Deployed by GoCD Pipeline!
+          Deployed by Jenkins Pipeline!
         </p>
       </header>
     </div>
