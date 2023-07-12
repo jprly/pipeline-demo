@@ -1,8 +1,8 @@
 pipelines:
-  reactpipe:
-    group: reactdemo
+  react:
+    group: react
     materials:
-      reactdemo: # this is the name of material
+      react:  # this is the name of material
         # says about type of material and url at once
         git: https://github.com/jprly/pipeline-demo.git
         branch: main
@@ -13,18 +13,21 @@ pipelines:
               tasks:
                - exec: # indicates type of task
                    command: make
-                   arguments: build
+                   arguments:
+                    - "build"
       - test: # name of stage
           jobs:
             test: # name of the job
               tasks:
                - exec: # indicates type of task
                    command: make
-                   arguments: test
+                   arguments:
+                    - "test"
       - deploy: # name of stage
           jobs:
-            deploy: # name of the job
+            build: # name of the job
               tasks:
                - exec: # indicates type of task
                    command: make
-                   arguments: deploy
+                   arguments:
+                    - "deploy"
