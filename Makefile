@@ -1,8 +1,8 @@
 build:
-	npm build
+	npm run build
 
 test:
-	CI=true npm test
+	CI=true npm run test
 
 deploy:
 	echo "deploying..."
