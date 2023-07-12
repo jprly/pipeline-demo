@@ -5,6 +5,7 @@ pipeline {
         stage('Test aws cli') {
             steps {
                 sh  """
+                    echo "$aws_access_key_id"
                     aws help
                 """
             }
