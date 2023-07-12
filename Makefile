@@ -1,4 +1,5 @@
 build:
+	nvm install 16
 	npm run build
 
 test:
