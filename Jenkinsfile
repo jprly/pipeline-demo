@@ -12,7 +12,9 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'testing....'
+                sh """
+                CI=true npm run test
+                """
             }
         }
         stage('Deploy') {
