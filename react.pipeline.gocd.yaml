@@ -7,6 +7,14 @@ pipelines:
         git: https://github.com/jprly/pipeline-demo.git
         branch: main
     stages:
+      - install: # name of stage
+          jobs:
+            install: # name of the job
+              tasks:
+               - exec: # indicates type of task
+                   command: make
+                   arguments:
+                    - "install"
       - build: # name of stage
           jobs:
             build: # name of the job
