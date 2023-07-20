@@ -1,49 +1,65 @@
+format_version: 10
 pipelines:
-  react:
-    group: react
+  demo-pipeline:
+    group: front-end
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
     materials:
-      react:  # this is the name of material
-        # says about type of material and url at once
-        git: https://github.com/jprly/pipeline-demo.git
+      git-080b155:
+        git: https://github.com/jprly/pipeline-demo
+        shallow_clone: false
+        auto_update: true
         branch: main
     stages:
-      - install: # name of stage
-          artifacts:
-            - test:
-                source: "/"
-                destination: build
-          jobs:
-            install: # name of the job
-              tasks:
-               - exec: # indicates type of task
-                   command: make
-                   arguments:
-                    - "install"
-               - exec: # indicates type of task
-                   command: make
-                   arguments:
-                    - "build"
-      - build: # name of stage
-          jobs:
-            build: # name of the job
-              tasks:
-               - exec: # indicates type of task
-                   command: make
-                   arguments:
-                    - "build"
-      - test: # name of stage
-          jobs:
-            test: # name of the job
-              tasks:
-               - exec: # indicates type of task
-                   command: make
-                   arguments:
-                    - "test"
-      - deploy: # name of stage
-          jobs:
-            build: # name of the job
-              tasks:
-               - exec: # indicates type of task
-                   command: make
-                   arguments:
-                    - "deploy"
+    - install:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          install:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - install
+                command: make
+                run_if: passed
+    - build:
+        fetch_materials: false
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          build:
+            timeout: 0
+            tasks:
+            - exec:
+                command: ls
+                run_if: passed
+            - exec:
+                arguments:
+                - build
+                command: make
+                run_if: passed
+    - test:
+        fetch_materials: false
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          test:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - test
+                command: make
+                run_if: passed
