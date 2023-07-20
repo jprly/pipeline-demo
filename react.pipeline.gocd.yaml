@@ -15,6 +15,10 @@ pipelines:
                    command: make
                    arguments:
                     - "install"
+               - exec: # indicates type of task
+                   command: make
+                   arguments:
+                    - "build"
       - build: # name of stage
           jobs:
             build: # name of the job
