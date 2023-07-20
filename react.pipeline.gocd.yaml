@@ -8,6 +8,10 @@ pipelines:
         branch: main
     stages:
       - install: # name of stage
+          artifacts:
+            - test:
+                source: "/"
+                destination: build
           jobs:
             install: # name of the job
               tasks:
